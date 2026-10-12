@@ -35,7 +35,7 @@ console.log("hello");
 //     isMarried: false,
 // }]
 
-// // localStorage.clear();
+// localStorage.clear();
 
 // //---set customer in localStorage
 // //1st step: convert object to string
@@ -52,28 +52,74 @@ console.log("hello");
 // console.log(parsedCustomer);
 
 
+
+
 // ---------------------- CRUD operations in localStorage--------------------
 
+let customerList = JSON.parse(localStorage.getItem("customerList")) || [];
+
 function btnaddCustomrOnAction() {
-    alert("add customer");
+
+    customerList.push({
+        id: document.getElementById("txtid").value,
+        name: document.getElementById("txtname").value,
+        age: document.getElementById("txtage").value,
+        address: document.getElementById("txtaddress").value,
+    });
+    localStorage.setItem("customerList", JSON.stringify(customerList));
+
+       alert("add customer");
 }
 
 function btnSearchCustomrOnAction() {
     alert("search customer");
+
+    document.getElementById("txtid").value = customerList[0].id;
+    document.getElementById("txtname").value = customerList[0].name;
+    document.getElementById("txtage").value = customerList[0].age;
+    document.getElementById("txtaddress").value = customerList[0].address;
+    
 }
 
 function btnDeleteCustomrOnAction() {
     alert("delete customer");
+    document.getElementById("txtid").value = "";
+    document.getElementById("txtname").value = "";
+    document.getElementById("txtage").value = "";
+    document.getElementById("txtaddress").value = "";   
 }
 
 function btnUpdateCustomrOnAction() {
     alert("update customer");
+    document.getElementById("txtid").value = customerList[0].id;
+    document.getElementById("txtname").value = customerList[0].name;
+    document.getElementById("txtage").value = customerList[0].age;
+    document.getElementById("txtaddress").value = customerList[0].address;
 }
 
 function btnClearStorageOnAction() {
-    alert("clear storage");
+    localStorage.clear();
+    customerList = [];
+    document.getElementById("txtid").value = "";
+    document.getElementById("txtname").value = "";
+    document.getElementById("txtage").value = "";
+    document.getElementById("txtaddress").value = "";
 }
 
 function btnLoadTableOnAction() {
     alert("load table");
+
+    let tblbdy = "";
+
+    customerList.forEach(customer => {
+        tblbdy += `
+            <tr>
+            <td>${customer.id}</td>
+            <td>${customer.name}</td>
+            <td>${customer.age}</td>
+            <td>${customer.address}</td>
+        </tr>
+        `;
+    });
+    document.getElementById("tblCustomer").innerHTML = tblbdy;
 }
