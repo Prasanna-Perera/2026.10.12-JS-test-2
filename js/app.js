@@ -67,8 +67,8 @@ function btnaddCustomrOnAction() {
         address: document.getElementById("txtaddress").value,
     });
     localStorage.setItem("customerList", JSON.stringify(customerList));
-
-       alert("add customer");
+    btnLoadTableOnAction();
+      
 }
 
 function btnSearchCustomrOnAction() {
@@ -100,6 +100,13 @@ function btnUpdateCustomrOnAction() {
 function btnClearStorageOnAction() {
     localStorage.clear();
     customerList = [];
+    document.getElementById("txtid").value = "";
+    document.getElementById("txtname").value = "";
+    document.getElementById("txtage").value = "";
+    document.getElementById("txtaddress").value = "";
+}
+
+function btnClearConsoleOnAction(){
     document.getElementById("txtid").value = "";
     document.getElementById("txtname").value = "";
     document.getElementById("txtage").value = "";
